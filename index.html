@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jane Castro Fotografia | Eternizando Momentos</title>
+    <meta name="description" content="Estúdio de fotografia especializado em Bebês, Gestantes e Smash the Cake em Fortaleza. Agende seu ensaio.">
+    
+    <!-- Tailwind CSS (Estilização Moderna) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fontes Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- Ícones (Lucide) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Personalização de Fontes e Cores */
+        :root {
+            --primary-color: #d4a373; /* Tom Terra/Dourado Suave */
+            --secondary-color: #faedcd; /* Creme */
+            --text-color: #4b5563;
+        }
+        
+        body {
+            font-family: 'Lato', sans-serif;
+            color: var(--text-color);
+            background-color: #fdfbf7;
+        }
+
+        h1, h2, h3, h4, .serif-font {
+            font-family: 'Cormorant Garmond', serif;
+        }
+
+        /* Efeito Suave no Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Modal / Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 4px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox.active img {
+            transform: scale(1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Botão Pulsante do WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 900;
+            transition: transform 0.3s;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header / Navbar -->
+    <header class="bg-white/90 backdrop-blur-md fixed w-full top-0 z-50 shadow-sm transition-all duration-300">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="text-2xl font-bold serif-font text-stone-800 tracking-wider">
+                JANE CASTRO <span class="text-amber-600 block text-xs font-sans tracking-widest font-normal">FOTOGRAFIA</span>
+            </div>
+            
+            <nav class="hidden md:flex space-x-6 text-sm font-semibold tracking-wide text-stone-600">
+                <a href="#sobre" class="hover:text-amber-600 transition">O ESTÚDIO</a>
+                <a href="#como-funciona" class="hover:text-amber-600 transition">COMO FUNCIONA</a>
+                <a href="#portfolio" class="hover:text-amber-600 transition">PORTFÓLIO</a>
+                <a href="#depoimentos" class="hover:text-amber-600 transition">DEPOIMENTOS</a>
+                <a href="#pacotes" class="hover:text-amber-600 transition">PACOTES</a>
+                <a href="#faq" class="hover:text-amber-600 transition">DÚVIDAS</a>
+            </nav>
+
+            <a href="https://wa.me/5585999979144?text=Olá,%20gostaria%20de%20agendar%20um%20ensaio!" target="_blank" class="hidden md:inline-flex items-center bg-amber-600 text-white px-5 py-2 rounded-full text-sm hover:bg-amber-700 transition shadow-lg">
+                Agendar Agora
+            </a>
+
+            <!-- Menu Mobile Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-stone-800">
+                <i data-lucide="menu" class="w-8 h-8"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t p-4 absolute w-full shadow-lg z-40">
+            <a href="#sobre" class="block py-3 text-stone-600 border-b">O Estúdio</a>
+            <a href="#como-funciona" class="block py-3 text-stone-600 border-b">Como Funciona</a>
+            <a href="#portfolio" class="block py-3 text-stone-600 border-b">Portfólio</a>
+            <a href="#depoimentos" class="block py-3 text-stone-600 border-b">Depoimentos</a>
+            <a href="#pacotes" class="block py-3 text-stone-600 border-b">Pacotes Smash</a>
+            <a href="#faq" class="block py-3 text-stone-600">Dúvidas Frequentes</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen min-h-[600px] flex items-center justify-center bg-cover bg-center" style="background-image: url('./img/foto_01.png');">
+        <div class="absolute inset-0 bg-black/30"></div> <!-- Overlay -->
+        <div class="relative z-10 text-center text-white px-4 animate-fade-in-up">
+            <span class="uppercase tracking-[0.2em] text-sm md:text-base mb-4 block text-amber-100">Especialista em Bebês e Gestantes</span>
+            <h1 class="text-5xl md:text-7xl font-bold serif-font mb-6 leading-tight">
+                Memórias que duram <br> <span class="italic font-light text-amber-200">para sempre</span>
+            </h1>
+            <p class="max-w-xl mx-auto text-lg md:text-xl mb-8 font-light text-gray-100">
+                Registramos a pureza dos primeiros dias e a alegria do primeiro ano com sensibilidade e segurança em Fortaleza.
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <a href="#pacotes" class="bg-amber-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-amber-700 transition shadow-xl transform hover:-translate-y-1">
+                    Ver Pacotes
+                </a>
+                <a href="#portfolio" class="bg-white/10 backdrop-blur-sm border border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-stone-800 transition">
+                    Ver Galeria
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre / Diferenciais -->
+    <section id="sobre" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2 relative">
+                    <div class="absolute -top-4 -left-4 w-24 h-24 bg-amber-100 rounded-full -z-10"></div>
+                    <img src="./img/foto_03.png" alt="Jane Castro no Estúdio" class="rounded-lg shadow-2xl w-full object-cover h-[500px]">
+                    <div class="absolute -bottom-6 -right-6 bg-white p-6 shadow-xl rounded-lg max-w-xs hidden md:block">
+                        <p class="serif-font text-2xl text-amber-600 font-bold">Segurança</p>
+                        <p class="text-sm text-gray-500">Ambiente higienizado e climatizado para o conforto do seu bebê.</p>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <h2 class="text-amber-600 font-bold uppercase tracking-widest text-sm mb-2">Sobre Nós</h2>
+                    <h3 class="text-4xl md:text-5xl serif-font text-stone-800 mb-6">Fotografia com Alma e Carinho</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Olá! Sou Jane Castro. Nosso estúdio é preparado para receber sua família com todo conforto. Entendemos que fotografar bebês exige paciência, técnica e, acima de tudo, amor.
+                    </p>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Nossas fotos passam por edição e tratamento criteriosos, sem manipulações profundas que alterem os traços naturais, garantindo uma recordação autêntica e atemporal.
+                    </p>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center text-stone-700">
+                            <i data-lucide="check-circle" class="text-amber-600 mr-3 w-5"></i> Looks disponíveis para seu filho
+                        </li>
+                        <li class="flex items-center text-stone-700">
+                            <i data-lucide="check-circle" class="text-amber-600 mr-3 w-5"></i> Bolos deliciosos e temáticos inclusos (Pacotes 2 e 3)
+                        </li>
+                        <li class="flex items-center text-stone-700">
+                            <i data-lucide="check-circle" class="text-amber-600 mr-3 w-5"></i> Entrega ágil em Fortaleza
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Como Funciona / Processo -->
+    <section id="como-funciona" class="py-20 bg-stone-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-amber-600 font-bold uppercase tracking-widest text-sm mb-2">Passo a Passo</h2>
+                <h3 class="text-3xl md:text-5xl serif-font text-stone-800">Como acontece o ensaio?</h3>
+            </div>
+
+            <div class="relative">
+                <!-- Linha conectora (visível apenas em desktop) -->
+                <div class="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-amber-200 -z-10 transform -translate-y-1/2"></div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <!-- Passo 1 -->
+                    <div class="bg-white p-6 rounded-xl shadow-md text-center relative group hover:-translate-y-2 transition duration-300 border border-stone-100">
+                        <div class="w-16 h-16 bg-amber-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 border-4 border-stone-50 relative z-10 shadow-lg">1</div>
+                        <h4 class="text-xl font-bold text-stone-800 mb-2">Agendamento</h4>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Você escolhe o pacote e a data pelo WhatsApp. A reserva é confirmada mediante sinal de <strong>R$ 100,00</strong>.
+                        </p>
+                    </div>
+
+                    <!-- Passo 2 -->
+                    <div class="bg-white p-6 rounded-xl shadow-md text-center relative group hover:-translate-y-2 transition duration-300 border border-stone-100">
+                        <div class="w-16 h-16 bg-amber-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 border-4 border-stone-50 relative z-10 shadow-lg">2</div>
+                        <h4 class="text-xl font-bold text-stone-800 mb-2">Preparação</h4>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Definimos o tema e cenário. <strong>Dispomos de looks</strong> para o bebê! Se for Smash, o bolo já está incluso (Pcts 2 e 3).
+                        </p>
+                    </div>
+
+                    <!-- Passo 3 -->
+                    <div class="bg-white p-6 rounded-xl shadow-md text-center relative group hover:-translate-y-2 transition duration-300 border border-stone-100">
+                        <div class="w-16 h-16 bg-amber-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 border-4 border-stone-50 relative z-10 shadow-lg">3</div>
+                        <h4 class="text-xl font-bold text-stone-800 mb-2">O Ensaio</h4>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Respeitamos o tempo do bebê com paciência e segurança. O ensaio termina com o divertido <strong>Splash (banho)</strong>.
+                        </p>
+                    </div>
+
+                    <!-- Passo 4 -->
+                    <div class="bg-white p-6 rounded-xl shadow-md text-center relative group hover:-translate-y-2 transition duration-300 border border-stone-100">
+                        <div class="w-16 h-16 bg-amber-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 border-4 border-stone-50 relative z-10 shadow-lg">4</div>
+                        <h4 class="text-xl font-bold text-stone-800 mb-2">Entrega</h4>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Em 24h você recebe a galeria para seleção. Após escolher, entregamos as fotos editadas e impressas em até <strong>20 dias</strong>.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                     <a href="https://wa.me/5585999979144?text=Li%20o%20passo%20a%20passo%20e%20quero%20agendar!" class="inline-flex items-center text-amber-700 font-bold border-b-2 border-amber-600 hover:text-amber-800 transition pb-1">
+                        Ficou com alguma dúvida? Fale conosco <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeria Interativa (Restaurada) -->
+    <section id="portfolio" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-5xl serif-font text-stone-800 mb-4">Portfólio Recente</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto">Clique nas imagens para ampliar e ver os detalhes dos nossos cenários e produções.</p>
+            </div>
+
+            <!-- Grid de Fotos -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- Foto 1 -->
+                <div class="group relative overflow-hidden rounded-lg shadow-md cursor-pointer aspect-square" onclick="openLightbox(this)">
+                    <img src="./img/foto_02.png" data-full="./img/foto_02.png" alt="Ensaio Newborn" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                </div>
+                <!-- Foto 2 -->
+                <div class="group relative overflow-hidden rounded-lg shadow-md cursor-pointer aspect-square" onclick="openLightbox(this)">
+                    <img src="./img/foto_04.png" data-full="./img/foto_04.png" alt="Smash the Cake" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                </div>
+                <!-- Foto 3 -->
+                <div class="group relative overflow-hidden rounded-lg shadow-md cursor-pointer aspect-square" onclick="openLightbox(this)">
+                    <img src="./img/foto_05.png" data-full="./img/foto_05.png" alt="Gestante" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                </div>
+                <!-- Foto 4 -->
+                <div class="group relative overflow-hidden rounded-lg shadow-md cursor-pointer aspect-square" onclick="openLightbox(this)">
+                    <img src="./img/foto_06.png" data-full="./img/foto_06.png" alt="Família" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                </div>
+                 <!-- Foto 5 -->
+                 <div class="group relative overflow-hidden rounded-lg shadow-md cursor-pointer aspect-square" onclick="openLightbox(this)">
+                    <img src="./img/foto_07.png" data-full="./img/foto_07.png" alt="Bebê Sorrindo" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                </div>
+                <!-- Foto 6 -->
+                <div class="group relative overflow-hidden rounded-lg shadow-md cursor-pointer aspect-square" onclick="openLightbox(this)">
+                    <img src="./img/foto_08.png" data-full="./img/foto_08.png" alt="Detalhes" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <a href="https://instagram.com/janecastrofotografias" target="_blank" class="inline-flex items-center text-amber-600 font-bold hover:text-amber-700 transition">
+                    <i data-lucide="instagram" class="mr-2"></i> Ver mais no Instagram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos (Restaurada) -->
+    <section id="depoimentos" class="py-20 bg-stone-50 relative overflow-hidden">
+        <!-- Elemento decorativo de fundo -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-amber-50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 transform translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-stone-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 transform -translate-x-1/2 translate-y-1/2"></div>
+
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-amber-600 font-bold uppercase tracking-widest text-sm mb-2">O que dizem as mamães</h2>
+                <h3 class="text-3xl md:text-5xl serif-font text-stone-800">Amor em cada detalhe</h3>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Depoimento 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition relative">
+                    <i data-lucide="quote" class="text-amber-200 w-12 h-12 absolute top-6 left-6 -z-10 opacity-50"></i>
+                    <div class="flex items-center mb-4">
+                        <div class="flex text-amber-400">
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-6">
+                        "A Jane é maravilhosa! Eu estava preocupada se meu bebê iria estranhar, mas ela tem uma paciência incrível. As fotos ficaram perfeitas, uma lembrança para a vida toda."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-stone-200 rounded-full flex items-center justify-center text-stone-500 font-bold serif-font mr-3">
+                            MS
+                        </div>
+                        <div>
+                            <p class="font-bold text-stone-800 text-sm">Maria Silva</p>
+                            <p class="text-xs text-gray-500">Mãe do Pedro (1 ano)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Depoimento 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition relative transform md:-translate-y-2">
+                    <i data-lucide="quote" class="text-amber-200 w-12 h-12 absolute top-6 left-6 -z-10 opacity-50"></i>
+                    <div class="flex items-center mb-4">
+                        <div class="flex text-amber-400">
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-6">
+                        "Fizemos o pacote com bolo incluso e foi a melhor escolha. O bolo era lindo e delicioso, e o cenário super caprichado. Recomendo de olhos fechados!"
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center text-amber-600 font-bold serif-font mr-3">
+                            AP
+                        </div>
+                        <div>
+                            <p class="font-bold text-stone-800 text-sm">Ana Paula</p>
+                            <p class="text-xs text-gray-500">Mãe da Sofia (Smash the Cake)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Depoimento 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition relative">
+                    <i data-lucide="quote" class="text-amber-200 w-12 h-12 absolute top-6 left-6 -z-10 opacity-50"></i>
+                    <div class="flex items-center mb-4">
+                        <div class="flex text-amber-400">
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-6">
+                        "Atendimento nota 1000 desde o WhatsApp até a entrega. O álbum ficou impecável, qualidade surpreendente. Valeu cada centavo do investimento."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-stone-200 rounded-full flex items-center justify-center text-stone-500 font-bold serif-font mr-3">
+                            FC
+                        </div>
+                        <div>
+                            <p class="font-bold text-stone-800 text-sm">Fernanda Costa</p>
+                            <p class="text-xs text-gray-500">Ensaio Gestante e Newborn</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pacotes (Baseado no PDF) -->
+    <section id="pacotes" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl serif-font text-stone-800 mb-4">Investimento Smash The Cake</h2>
+                <p class="text-gray-500">Escolha o pacote ideal para celebrar o primeiro aninho. Valores à vista com desconto.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                
+                <!-- Pacote 1 -->
+                <div class="border border-stone-200 rounded-2xl p-8 hover:shadow-xl transition relative bg-white">
+                    <h3 class="text-2xl serif-font font-bold text-stone-800 mb-2">Pacote 1</h3>
+                    <p class="text-sm text-gray-500 mb-6 uppercase tracking-wider">Básico & Lindo</p>
+                    <div class="text-4xl font-bold text-amber-600 mb-6">R$ 490<span class="text-sm text-stone-500 font-normal">,00 à vista</span></div>
+                    
+                    <ul class="space-y-3 mb-8 text-stone-600 text-sm">
+                        <li class="flex items-start"><i data-lucide="check" class="w-4 h-4 text-amber-500 mr-2 mt-1"></i> 1 Cenário + Splash</li>
+                        <li class="flex items-start"><i data-lucide="x" class="w-4 h-4 text-red-300 mr-2 mt-1"></i> <strong>Não inclui bolo</strong></li>
+                        <li class="flex items-start"><i data-lucide="check" class="w-4 h-4 text-amber-500 mr-2 mt-1"></i> 15 Fotos Digitais</li>
+                        <li class="flex items-start"><i data-lucide="check" class="w-4 h-4 text-amber-500 mr-2 mt-1"></i> 15 Revelações 15x21</li>
+                        <li class="flex items-start"><i data-lucide="check" class="w-4 h-4 text-amber-500 mr-2 mt-1"></i> Apenas fotos da criança (1 com pais)</li>
+                    </ul>
+                    <a href="https://wa.me/5585999979144?text=Olá,%20tenho%20interesse%20no%20Pacote%201%20do%20Smash!" class="block w-full text-center py-3 border border-amber-600 text-amber-600 font-bold rounded-lg hover:bg-amber-50 transition">
+                        Reservar Data
+                    </a>
+                </div>
+
+                <!-- Pacote 2 (Destaque) -->
+                <div class="border-2 border-amber-400 rounded-2xl p-8 shadow-2xl relative transform md:-translate-y-4 bg-white">
+                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-amber-600 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">
+                        Mais Popular
+                    </div>
+                    <h3 class="text-2xl serif-font font-bold text-stone-800 mb-2">Pacote 2</h3>
+                    <p class="text-sm text-gray-500 mb-6 uppercase tracking-wider">Completo com Bolo</p>
+                    <div class="text-4xl font-bold text-amber-600 mb-6">R$ 690<span class="text-sm text-stone-500 font-normal">,00 à vista</span></div>
+                    
+                    <ul class="space-y-3 mb-8 text-stone-600 text-sm">
+                        <li class="flex items-start"><i data-lucide="check" class="w-4 h-4 text-amber-500 mr-2 mt-1"></i> <strong>2 Cenários</strong> + Splash</li>
+                        <li class="flex items-start"><i data-lucide="check" class="w-4 h-4 text-amber-500 mr-2 mt-1"></i> <strong>Bolo Incluso</strong></li>
+                        <li class="flex items-start"><i data-lucide="check" class="w-4 h-4 text-amber-500 mr-2 mt-1"></i> Foto com os Pais Inclusa</li>
+                        <li class="flex items-start"><i data-lucide="check" class="w-4 h-4 text-amber-500 mr-2 mt-1"></i> 25 Fotos Digitais + Reveladas</li>
+                    </ul>
+                    <a href="https://wa.me/5585999979144?text=Olá,%20tenho%20interesse%20no%20Pacote%202%20do%20Smash!" class="block w-full text-center py-3 bg-amber-600 text-white font-bold rounded-lg hover:bg-amber-700 transition">
+                        Eu Quero Esse!
+                    </a>
+                </div>
+
+                <!-- Pacote 3 -->
+                <div class="border border-stone-200 rounded-2xl p-8 hover:shadow-xl transition relative bg-white">
+                    <h3 class="text-2xl serif-font font-bold text-stone-800 mb-2">Pacote 3</h3>
+                    <p class="text-sm text-gray-500 mb-6 uppercase tracking-wider">Premium + Álbum</p>
+                    <div class="text-4xl font-bold text-amber-600 mb-6">R$ 1.190<span class="text-sm text-stone-500 font-normal">,00 à vista</span></div>
+                    
+                    <ul class="space-y-3 mb-8 text-stone-600 text-sm">
+                        <li class="flex items-start"><i data-lucide="check" class="w-4 h-4 text-amber-500 mr-2 mt-1"></i> 2 Cenários + Splash + Bolo</li>
+                        <li class="flex items-start"><i data-lucide="check" class="w-4 h-4 text-amber-500 mr-2 mt-1"></i> <strong>40 Fotos Digitais</strong></li>
+                        <li class="flex items-start"><i data-lucide="star" class="w-4 h-4 text-amber-500 mr-2 mt-1"></i> <strong>Brinde: Álbum Slim 20x30</strong></li>
+                        <li class="flex items-start"><i data-lucide="check" class="w-4 h-4 text-amber-500 mr-2 mt-1"></i> 10 Fotos Reveladas</li>
+                    </ul>
+                    <a href="https://wa.me/5585999979144?text=Olá,%20tenho%20interesse%20no%20Pacote%203%20Premium!" class="block w-full text-center py-3 border border-amber-600 text-amber-600 font-bold rounded-lg hover:bg-amber-50 transition">
+                        Reservar Premium
+                    </a>
+                </div>
+
+            </div>
+            
+            <p class="text-center text-xs text-gray-400 mt-8">
+                *Valores parcelados no cartão possuem acréscimo. Consulte condições. Reserva mediante sinal de R$ 100,00.
+            </p>
+        </div>
+    </section>
+
+    <!-- FAQ (Reduzir Atendimento no WhatsApp) -->
+    <section id="faq" class="py-20 bg-stone-100">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-3xl md:text-4xl serif-font text-stone-800 mb-10 text-center">Dúvidas Frequentes</h2>
+            
+            <div class="space-y-4">
+                <!-- Pergunta 1 -->
+                <details class="bg-white p-6 rounded-lg shadow-sm cursor-pointer group">
+                    <summary class="flex justify-between items-center font-bold text-stone-700 list-none">
+                        Qual o prazo de entrega das fotos?
+                        <span class="transform group-open:rotate-180 transition"><i data-lucide="chevron-down"></i></span>
+                    </summary>
+                    <p class="mt-4 text-gray-600 text-sm">
+                        O prazo de entrega é de 20 dias após a seleção na galeria online. A prévia/galeria para seleção é enviada em até 24h após o ensaio.
+                    </p>
+                </details>
+
+                <!-- Pergunta 2 -->
+                <details class="bg-white p-6 rounded-lg shadow-sm cursor-pointer group">
+                    <summary class="flex justify-between items-center font-bold text-stone-700 list-none">
+                        Posso levar meu animal de estimação (PET)?
+                        <span class="transform group-open:rotate-180 transition"><i data-lucide="chevron-down"></i></span>
+                    </summary>
+                    <p class="mt-4 text-gray-600 text-sm">
+                        Para manter a higiene e segurança do ambiente para os bebês, <strong>não aceitamos PETs</strong> de nenhum porte no estúdio.
+                    </p>
+                </details>
+
+                <!-- Pergunta 3 -->
+                <details class="bg-white p-6 rounded-lg shadow-sm cursor-pointer group">
+                    <summary class="flex justify-between items-center font-bold text-stone-700 list-none">
+                        Como funciona o cancelamento ou reagendamento?
+                        <span class="transform group-open:rotate-180 transition"><i data-lucide="chevron-down"></i></span>
+                    </summary>
+                    <p class="mt-4 text-gray-600 text-sm">
+                        O reagendamento deve ser feito com pelo menos 72h de antecedência. Cancelamentos com menos de 72h implicam na retenção do sinal de reserva (R$ 100,00).
+                    </p>
+                </details>
+
+                <!-- Pergunta 4 -->
+                <details class="bg-white p-6 rounded-lg shadow-sm cursor-pointer group">
+                    <summary class="flex justify-between items-center font-bold text-stone-700 list-none">
+                        O bolo está incluso?
+                        <span class="transform group-open:rotate-180 transition"><i data-lucide="chevron-down"></i></span>
+                    </summary>
+                    <p class="mt-4 text-gray-600 text-sm">
+                        Nos pacotes 2 e 3, o bolo tradicional no tema escolhido já está incluso! Ele é delicioso e seguro para a criança. No pacote 1, o bolo não está incluso.
+                    </p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-stone-300 py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-2xl serif-font text-white mb-2">JANE CASTRO</h3>
+                    <p class="text-sm">Fotografia especializada em Fortaleza, CE.</p>
+                </div>
+                <div class="flex gap-6 mb-6 md:mb-0">
+                    <a href="#" class="hover:text-white transition"><i data-lucide="instagram"></i></a>
+                    <a href="#" class="hover:text-white transition"><i data-lucide="facebook"></i></a>
+                </div>
+                <div class="text-sm">
+                    <p class="mb-1"><i data-lucide="phone" class="inline w-4 h-4 mr-1"></i> (85) 99997-9144</p>
+                    <p>&copy; 2024 Jane Castro Fotografia. Todos os direitos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botão Flutuante WhatsApp -->
+    <a href="https://wa.me/5585999979144" class="whatsapp-float" target="_blank" title="Falar no WhatsApp">
+        <i data-lucide="message-circle" class="w-8 h-8"></i>
+    </a>
+
+    <!-- Lightbox Modal Structure -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+        <span class="close-btn" onclick="closeLightbox(event)">&times;</span>
+        <img id="lightbox-img" src="" alt="Imagem Ampliada">
+    </div>
+
+    <script>
+        // Inicializa ícones
+        lucide.createIcons();
+
+        // Menu Mobile Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Lightbox Logic
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        function openLightbox(element) {
+            const img = element.querySelector('img');
+            // Verifica se tem uma versão de alta qualidade no data-attribute, se não usa o src normal
+            const fullSrc = img.getAttribute('data-full') || img.src;
+            
+            lightboxImg.src = fullSrc;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Previne scroll
+        }
+
+        function closeLightbox(e) {
+            if (e.target !== lightboxImg) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto'; // Libera scroll
+            }
+        }
+        
+        // Fechar com ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+</body>
+</html>
